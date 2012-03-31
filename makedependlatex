@@ -21,7 +21,8 @@ dvifile=`echo ${1} | sed 's/\(\.[^\.]*\)\?$/.dvi/'`
 # to do
 
 # find figures
-# if one line has multiple figures, only one of them will be found
+# if one line has multiple figures, only one of them will be found. this needs to be fixed.
+# if a line has "\%", the following operation will treat it as a commented line. this needs to be fixed.
 sed -n 's/^[^%]*\\\(includegraphics\|begin{overpic}\)\(\[.*\]\)\?{\(.*\)}.*$/\3/p' ${1} > ${dependfile}
 
 # find bib files
