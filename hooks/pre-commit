@@ -1,0 +1,42 @@
+#!/bin/bash
+# This is a git pre-commit script to replace version strings by current time.
+
+VERSION="2012-04-03 14:36:43-04:00"
+FILES='gpmp2latexmp makedependlatex hooks/pre-commit'
+
+# get current time as version string
+v=`date --rfc-3339=seconds`
+
+# go to the repository root
+cd `git rev-parse --show-toplevel`
+
+# check working tree files, if modified, replace version string
+mf=''
+for f in $FILES
+do
+	git status --porcelain ${f} | grep "^[AM][ MD]"
+	if [ $? -eq 0 ]
+	then
+		mf="${mf} ${f}"
+		if [ -s ${f} ]
+		then
+			sed -i "s/^VERSION=.*\$/VERSION=\"${v}\"/" $f
+		fi
+	fi
+done
+
+# put working tree aside, get indexed files
+git stash --keep-index
+
+# replace version strings in indexed files
+for f in $mf
+do
+	sed -i "s/^VERSION=.*\$/VERSION=\"${v}\"/" $f
+done
+
+# index the new version string
+git add $mf
+
+# put back working tree
+git stash pop
+
