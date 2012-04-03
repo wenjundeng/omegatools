@@ -1,10 +1,13 @@
 #!/bin/bash
+# Copyright 2012 Wenjun Deng
 
-version=v20120330
+VERSION="2012-04-03 14:23:56-04:00"
 
 if [ -z "${1}" ];
 then
-	echo "Usage: `basename ${0}` <latex file name>"
+	echo "makedependlatex version ${VERSION}"
+	echo "Generate dependency file from latex source to include in Makefile."
+	echo "Usage: makedependlatex <latex file name>"
 	exit
 fi
 if [ ! -f ${1} ];
