@@ -33,7 +33,7 @@ Contact
 -------
 
 Get latest updates on the project website:
-<http://wdeng.info/codes/>
+<http://wdeng.info/codes/omegatools>
 Report bugs, contribute your patch by going to the project at GitHub:
 <http://github.com/wenjundeng/omegatools>
 
