@@ -38,8 +38,8 @@ Note that BSD-like systems, e.g., FreeBSD and Apple Mac OS X, have these
 utilities but they may be different from the GNU version.  Omega Tools has not
 been tested with BSD version of these utilities.  You may want to install the
 GNU version of them if you want to run Omega Tools on BSD-like systems.  On
-Apple Mac OS X, GNU utilities can be install through Fink
-<http://www.finkproject.org/> or MacPorts <http://www.macports.org/>.
+Apple Mac OS X, GNU utilities can be install through
+[Fink](http://www.finkproject.org/) or [MacPorts](http://www.macports.org/).
 
 Installation
 ------------
