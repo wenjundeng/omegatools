@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Omega Tools.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION='2012-04-16 00:11:48-04:00'
+VERSION='2012-04-16 00:25:02-04:00'
 
 if [ -z "${1}" ];
 then
