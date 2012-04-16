@@ -19,7 +19,7 @@
 
 # This is a git pre-commit script to replace version strings by current time.
 
-VERSION='2012-04-16 00:09:22-04:00'
+VERSION='2012-04-16 00:11:48-04:00'
 FILES='hooks/pre-commit makedependlatex makedependgp gpmp2latexmp gpmpextendpalette gpmpuseexpal'
 
 # get current time as version string
