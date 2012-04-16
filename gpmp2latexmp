@@ -38,7 +38,7 @@ then
 	exit 1
 fi
 
-sed -i~ "s/%GNUPLOT Metapost output/%Processed by gpmp2latexmp ${version}: `date`\nverbatimtex\n%\&latex\n\\\\documentclass{article}\n\\\\usepackage{amsmath}\n\\\\begin{document}\netex\n\n%GNUPLOT Metapost output/
+sed -i~ "s/%GNUPLOT Metapost output/%Processed by gpmp2latexmp version ${VERSION}\n%Processed at `date`\nverbatimtex\n%\&latex\n\\\\documentclass{article}\n\\\\usepackage{amsmath}\n\\\\begin{document}\netex\n\n%GNUPLOT Metapost output/
 s/btex /btex $/g
 s/ etex/$ etex/g
 s/addto currentpicture also GPtext shifted (x,y)/addto currentpicture also GPtext shifted (x,y) withcolor currentcolor/g
