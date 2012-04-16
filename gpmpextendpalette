@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Omega Tools.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION="2012-04-03 15:18:20-04:00"
+VERSION="2012-04-03 15:18:20-04:00 to update"
 
 if [ -z "${1}" ];
 then
@@ -38,7 +38,8 @@ then
 	exit 1
 fi
 
-sed -i~ -e "s/%GNUPLOT Metapost output/%Processed by gpmpextendpalette version ${VERSION}\n%Processed at `date`\n%GNUPLOT Metapost output/" -e 's/col4:=0\?\.85\*green;/col4:=.45*green;/
+cp ${1} ${1}~
+sed -e "s/%GNUPLOT Metapost output/%Processed by gpmpextendpalette version ${VERSION}\n%Processed at `date`\n%GNUPLOT Metapost output/" -e 's/col4:=0\?\.85\*green;/col4:=.45*green;/
 s/col6:=0\?\.85\*cyan;/col6:=.8*white;/
-s/col7:=0\?\.85\*yellow;/col7:=.75*yellow;\ncol8:=.85*green;\ncol9:=.85*cyan;\ncol10:=.6*red;\ncol11:=(.4,.7,.4);\ncol12:=.5*blue;\ncol13:=.6*magenta;\ncol14:=(0,.5,1.0);/' ${1}
+s/col7:=0\?\.85\*yellow;/col7:=.75*yellow;\ncol8:=.85*green;\ncol9:=.85*cyan;\ncol10:=.6*red;\ncol11:=(.4,.7,.4);\ncol12:=.5*blue;\ncol13:=.6*magenta;\ncol14:=(0,.5,1.0);/' < ${1}~ > ${1}
 

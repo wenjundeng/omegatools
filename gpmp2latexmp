@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Omega Tools.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION="2012-04-03 15:18:20-04:00"
+VERSION="2012-04-03 15:18:20-04:00 to update"
 
 if [ -z "${1}" ];
 then
@@ -38,9 +38,10 @@ then
 	exit 1
 fi
 
-sed -i~ "s/%GNUPLOT Metapost output/%Processed by gpmp2latexmp version ${VERSION}\n%Processed at `date`\nverbatimtex\n%\&latex\n\\\\documentclass{article}\n\\\\usepackage{amsmath}\n\\\\begin{document}\netex\n\n%GNUPLOT Metapost output/
+cp ${1} ${1}~
+sed "s/%GNUPLOT Metapost output/%Processed by gpmp2latexmp version ${VERSION}\n%Processed at `date`\nverbatimtex\n%\&latex\n\\\\documentclass{article}\n\\\\usepackage{amsmath}\n\\\\begin{document}\netex\n\n%GNUPLOT Metapost output/
 s/btex /btex $/g
 s/ etex/$ etex/g
 s/addto currentpicture also GPtext shifted (x,y)/addto currentpicture also GPtext shifted (x,y) withcolor currentcolor/g
-s/end\./verbatimtex\n\\\\end{document}\netex\nend./" $1
+s/end\./verbatimtex\n\\\\end{document}\netex\nend./" < ${1}~ > ${1}
 
