@@ -19,8 +19,8 @@
 
 # This is a git pre-commit script to replace version strings by current time.
 
-VERSION="2012-04-03 15:18:20-04:00"
-FILES='hooks/pre-commit makedependlatex makedependgp gpmp2latexmp gpmpextendpalette'
+VERSION='2012-04-15 23:53:44-04:00'
+FILES='hooks/pre-commit makedependlatex makedependgp gpmp2latexmp gpmpextendpalette gpmpuseexpal'
 
 # get current time as version string
 v=`date --rfc-3339=seconds`
@@ -38,7 +38,8 @@ do
 		mf="${mf} ${f}"
 		if [ -s ${f} ]
 		then
-			sed -i "s/^VERSION=.*\$/VERSION='${v}'/" $f
+			sed "s/^VERSION=.*\$/VERSION='${v}'/" < ${f} > ${f}~
+			mv ${f}~ ${f}
 		fi
 	fi
 done
@@ -49,7 +50,8 @@ git stash --keep-index
 # replace version strings in indexed files
 for f in $mf
 do
-	sed -i "s/^VERSION=.*\$/VERSION='${v}'/" $f
+	sed "s/^VERSION=.*\$/VERSION='${v}'/" < ${f} > ${f}~
+	mv ${f}~ ${f}
 done
 
 # index the new version string
