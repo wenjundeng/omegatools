@@ -52,7 +52,6 @@ fi
 
 cp ${1} ${1}~
 
-sed -i ':a;N;$!ba;s/linetype '${2}';\ncurrentcolor:=col'${3}';/linetype '${2}';\ncurrentcolor:=col<extendedcolor>;/g' ${1}
-awk 'BEGIN {color=8} {if (flag==1 && match($0,"put_text")) color--;flag=0;if (sub(/<extendedcolor>/,color)) {color++;flag=1} print}' ${1} > ${1}.tmp
-mv ${1}.tmp ${1}
+sed ':a;N;$!ba;s/linetype '${2}';\ncurrentcolor:=col'${3}';/linetype '${2}';\ncurrentcolor:=col<extendedcolor>;/g' < ${1} > ${1}.tmp
+awk 'BEGIN {color=8} {if (flag==1 && match($0,"put_text")) color--;flag=0;if (sub(/<extendedcolor>/,color)) {color++;flag=1} print}' ${1}.tmp > ${1}
 
