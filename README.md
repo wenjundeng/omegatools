@@ -27,8 +27,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Omega Tools.  If not, see <http://www.gnu.org/licenses/>.
 
-System requirement
-------------------
+System requirements
+-------------------
 
 Omega Tools requires a number of GNU utilities, such as bash, sed, paste, sort,
 date, echo, rm, etc.  Typical installation of any major GNU/Linux distribution
