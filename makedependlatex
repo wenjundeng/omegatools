@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Omega Tools.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION='2012-07-04 19:31:47-04:00'
+VERSION='2012-07-05 14:55:16-04:00'
 
 if [ -z "${1}" ];
 then
@@ -26,7 +26,7 @@ then
 	echo
 	echo "Generate dependency file from latex source to include in Makefile."
 	echo
-	echo "Usage: makedependlatex <latex file name>"
+	echo "Usage: makedependlatex <latex file name> [target file name]"
 	echo
 	exit
 fi
@@ -39,11 +39,17 @@ fi
 dependfile=`echo ${1} | sed 's/\(\.[^\.]*\)\?$/.d/'`
 pdffile=`echo ${1} | sed 's/\(\.[^\.]*\)\?$/.pdf/'`
 dvifile=`echo ${1} | sed 's/\(\.[^\.]*\)\?$/.dvi/'`
+#target=`echo ${1} | sed 's/\(\.[^\.]*\)\?$//'`
+if [ -n "${2}" ];
+then
+	pdffile=`echo ${2} | sed 's/\(\.[^\.]*\)\?$/.pdf/'`
+	dvifile=`echo ${2} | sed 's/\(\.[^\.]*\)\?$/.dvi/'`
+fi
 
 # find input/include files
 # if one line has multiple figures, only one of them will be found. this needs to be fixed.
 # if a line has "\%", the following operation will treat it as a commented line. this needs to be fixed.
-sed -n 's/^[^%]*\\\(input\|include\){\(.*\)}/\2/p' ${1} | sed 's/\(.*\)/\n\1.d : \1.tex\n\tmakedependlatex \1.tex\n\n-include \1.d/' > ${dependfile}1
+sed -n 's/^[^%]*\\\(input\|include\){\(.*\)}/\2/p' ${1} | sed 's/\(.*\)/\n\1.d : \1.tex\n\tmakedependlatex \1.tex '"${pdffile}"'\n\n-include \1.d/' > ${dependfile}1
 sed -n 's/^[^%]*\\\(input\|include\){\(.*\)}/\2.tex/p' ${1} > ${dependfile}
 
 # find figures
