@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Copyright 2013 Wenjun Deng <wdeng@wdeng.info>
+
+# This file is part of Omega Tools.
+
+# Omega Tools is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# Omega Tools is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Omega Tools.  If not, see <http://www.gnu.org/licenses/>.
+
+VERSION='2013-03-11 11:51:50-04:00'
+
+if [ -z "${1}" ]
+then
+	echo
+	echo "gnuplot_lmp version ${VERSION}"
+	echo
+	echo "A wrapper that does these 3 things in sequence:"
+	echo "1. change to the directory of the gnuplot script file;"
+	echo "2. call gnuplot on the script file;"
+	echo "3. call gpmp2latexmp on the generated .mp file."
+	echo
+	echo "Usage: gnuplot_lmp <gnuplot script file>"
+	echo
+	exit
+
+fi
+if [ ! -f $1 ]
+then
+	echo "File $1 does not exist."
+	exit 1
+fi
+
+dir=`dirname $1`
+file=`basename $1`
+
+cd $dir
+outputfile=`sed -n 's/^set output ['\''"]\(.*\)['\''"]/\1/p' ${file}`
+
+if [ -z "${outputfile}" ]
+then
+	gnuplot $file > ${file%.*}.mp
+else
+	gnuplot $file
+fi
+
+gpmp2latexmp ${file%.*}.mp
+
