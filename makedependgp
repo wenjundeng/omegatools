@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2012 Wenjun Deng <wdeng@wdeng.info>
+# Copyright 2012, 2013 Wenjun Deng <wdeng@wdeng.info>
 
 # This file is part of Omega Tools.
 
@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Omega Tools.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION='2012-04-16 00:25:02-04:00'
+VERSION='2013-03-11 16:39:30-04:00'
 
 if [ -z "${1}" ];
 then
@@ -38,6 +38,11 @@ fi
 
 dependfile=`echo ${1} | sed 's/\(\.[^\.]*\)\?$/.d/'`
 outputfile=`sed -n 's/^set output ['\''"]\(.*\)['\''"]/\1/p' ${1}`
+
+if [ -z "${outputfile}" ];
+then
+	outputfile=`echo ${1} | sed 's/\(\.[^\.]*\)\?$/.mp/'`
+fi
 
 # find data files
 cat ${1} | sed ':a;N;$!ba;s/\\\r\?\n/ /g' | sed -n 's/^[[:blank:]]*\(plot.*\)/\1,/p' | sed 's/[^'\'']*'\''\([^'\'']*\)'\''[^,]*,/\1\n/g' > ${dependfile}
