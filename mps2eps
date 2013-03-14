@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2012 Wenjun Deng <wdeng@wdeng.info>
+# Copyright 2013 Wenjun Deng <wdeng@wdeng.info>
 
 # This file is part of Omega Tools.
 
@@ -17,28 +17,41 @@
 # You should have received a copy of the GNU General Public License
 # along with Omega Tools.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION='2012-04-16 00:25:25-04:00'
+VERSION='2013-03-14 11:07:40-04:00'
 
-if [ -z "${1}" ];
+if [ -z "${1}" ]
 then
 	echo
-	echo "updateversion_sh version ${VERSION}"
+	echo "mps2eps version ${VERSION}"
 	echo
-	echo "Updates the VERSION string to current time in (ba)sh script."
+	echo "A wrapper that uses tex and dvips to convert mps file to eps."
+	echo "The generated eps file will be in the same directory as the mps file."
 	echo
-	echo "Usage: updateversion_sh <(ba)sh script file name>"
+	echo "Usage: mps2eps <mps file>"
 	echo
 	exit
 fi
-if [ ! -f ${1} ];
+if [ ! -f $1 ]
 then
-	echo "File ${1} does not exist."
+	echo "File $1 does not exist."
 	exit 1
 fi
 
-# get current time as version string
-v=`date --rfc-3339=seconds`
+dir=`dirname $1`
+mps=`basename $1`
+eps=${mps%.*}.eps
+tmpname=${mps%.*}_mps2eps
+tmptex=${tmpname}.tex
+tmpdvi=${tmpname}.dvi
+tmplog=${tmpname}.log
 
-sed "s/^VERSION=.*\$/VERSION='${v}'/" < ${1} > ${1}~
-mv -f ${1}~ ${1}
+cd $dir
+echo '\nopagenumbers
+\input epsf
+\centerline{\epsfbox{'$mps'}}
+\end' > $tmptex
+
+tex $tmptex > /dev/null
+dvips -E -j -o $eps $tmpdvi 2> /dev/null
+rm -f $tmptex $tmpdvi $tmplog
 

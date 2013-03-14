@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Copyright 2012, 2013 Wenjun Deng <wdeng@wdeng.info>
+
+# This file is part of Omega Tools.
+
+# Omega Tools is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# Omega Tools is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Omega Tools.  If not, see <http://www.gnu.org/licenses/>.
+
+VERSION='2013-03-14 11:06:55-04:00'
+
+if [ -z "${1}" ];
+then
+	echo
+	echo "updateversion version ${VERSION}"
+	echo
+	echo "Updates the VERSION string to current time in (ba)sh/python script."
+	echo
+	echo "Usage: updateversion <(ba)sh/python script file name>"
+	echo
+	exit
+fi
+if [ ! -f ${1} ];
+then
+	echo "File ${1} does not exist."
+	exit 1
+fi
+
+# get current time as version string
+v=`date --rfc-3339=seconds`
+
+sed -i 's/^\(\s*\)VERSION=.*$/\1VERSION='"'${v}'"'/' $1
+
