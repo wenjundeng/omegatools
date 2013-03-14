@@ -37,7 +37,7 @@ class FabGP:
     fgp.build_pdf() # use this line to build pdf figures
     '''
 
-    VERSION='2013-03-14 11:07:10-04:00'
+    VERSION='2013-03-14 16:13:00-04:00'
 
     def __init__(self, list_fig):
         '''list_fig is a list of figure file names without extention,
@@ -65,17 +65,21 @@ class FabGP:
         '''Build mps figures'''
         for fig in self.list_fig:
             self.gp2mp(fig)
+        after()
+        for fig in self.list_fig:
             self.mp2mps(fig)
 
     def build_eps(self):
         '''Build eps figures'''
         self.build_mps()
+        after()
         for fig in self.list_fig:
             self.mps2eps(fig)
 
     def build_pdf(self):
         '''Build pdf figures'''
         self.build_mps()
+        after()
         for fig in self.list_fig:
             self.mps2pdf(fig)
 
