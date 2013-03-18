@@ -40,4 +40,5 @@ fi
 v=`date --rfc-3339=seconds`
 
 sed -i 's/^\(\s*\)VERSION=.*$/\1VERSION='"'${v}'"'/' $1
+sed -i 's/^\(\s*\)__version__ = .*$/\1__version__ = '"'${v}'"'/' $1
 
