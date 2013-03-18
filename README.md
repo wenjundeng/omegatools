@@ -13,8 +13,8 @@ After processing, MetaPost will use LaTeX to process texts in the figure.
 + **gnuplot_lmp**, **mpost_mps**, **mptopdf_mps**, **mps2eps** -- wrappers for
 [fabricate](https://code.google.com/p/fabricate/) to compile gnuplot MetaPost
 figures.
-+ **fabgp.py** -- provides a Python class to simplify writing of fabricate
-scripts for compiling gnuplot MetaPost figures.
++ **fabext.py** -- provides Python classes to simplify writing of fabricate
+scripts for compiling gnuplot figures and LaTeX documents.
 
 Copying
 -------
@@ -61,8 +61,9 @@ For the bash scripts, run each script with no argument to see usage
 information.  For the Python script, see usage information in docstrings, e.g.,
 in Python shell execute:
 
-	from fabgp import *
-	print FabGP.__doc__
+	from fabext import *
+	print FabGnuplot.__doc__
+	print FabLatex.__doc__
 
 
 Contact
