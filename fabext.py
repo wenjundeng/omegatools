@@ -21,7 +21,7 @@ This file provides some classes to simply building of gnuplot plots and LaTeX
 documents using fabricate <https://code.google.com/p/fabricate/>.
 '''
 
-__version__ = '2013-03-18 11:10:22-04:00'
+__version__ = '2013-05-10 11:15:28-04:00'
 
 import os
 from fabricate import *
@@ -151,7 +151,7 @@ class FabLatex:
         '''Remove temporary output files'''
         for tex in self.list_tex:
             for ext in ['.aux', '.bbl', '.blg', 'Notes.bib', '.out', \
-                '.log', '.nav', '.snm', '.toc', '.fdb_latexmk']:
+                '.log', '.nav', '.snm', '.toc', '.fls', '.fdb_latexmk']:
                 try:
                     os.remove(tex + ext)
                 except OSError, e:
